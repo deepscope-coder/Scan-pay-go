@@ -1,0 +1,8 @@
+flask
+python-barcode
+pillow
+opencv-python
+pyzbar
+psycopg2-binary
+reportlab
+python-dotenv

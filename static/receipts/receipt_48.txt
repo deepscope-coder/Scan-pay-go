@@ -1,0 +1,14 @@
+Customer ID: 48
+Name: Arif M
+Email: None
+
+Items Purchased:
+Product: Britannia Good Day Cookies | Price: ₹20.0 | Quantity: 1
+Product: Britannia Good Day Cookies | Price: ₹20.0 | Quantity: 1
+Product: Britannia Good Day Cookies | Price: ₹20.0 | Quantity: 1
+Product: Britannia Good Day Cookies | Price: ₹20.0 | Quantity: 1
+Product: Britannia Good Day Cookies | Price: ₹20.0 | Quantity: 1
+
+Total Price: ₹100.0
+
+Thank you for shopping with us!

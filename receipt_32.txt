@@ -1,0 +1,8 @@
+Customer ID: 32
+Name: Nandan M
+Email: N/A
+
+Items Purchased:
+Product: Sprite 1L | Price: ₹45.0 | Quantity: 1
+
+Thank you for shopping with us!

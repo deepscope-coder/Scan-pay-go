@@ -1,0 +1,10 @@
+Customer ID: 47
+Name: jahir
+Email: None
+
+Items Purchased:
+Product: Sprite 1L | Price: ₹45.0 | Quantity: 1
+Product: Sprite 1L | Price: ₹45.0 | Quantity: 1
+Product: Britannia Good Day Cookies | Price: ₹20.0 | Quantity: 1
+
+Thank you for shopping with us!

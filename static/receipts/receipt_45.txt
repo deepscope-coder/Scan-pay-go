@@ -1,0 +1,8 @@
+Customer ID: 45
+Name: Nasrin S
+Email: None
+
+Items Purchased:
+Product: Britannia Good Day Cookies | Price: ₹20.0 | Quantity: 1
+
+Thank you for shopping with us!

@@ -1,0 +1,144 @@
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    barcode VARCHAR(20) UNIQUE,
+    name VARCHAR(100),
+    category VARCHAR(50),
+    price NUMERIC(10, 2),
+    stock INT
+);
+
+INSERT INTO products (id, barcode, name, category, price, stock) VALUES
+(1, '1212121212128', 'Coca-Cola 1L', 'Beverages', 50.00, 19),
+(2, '9876543210987', 'LayÆs Chips (Large)', 'Snacks', 35.00, 46),
+(3, '1234567890123', 'Dairy Milk Chocolate', 'Sweets', 40.00, 13),
+(4, '5555555555555', 'Dettol Handwash 250ml', 'Personal Care', 75.00, 18),
+(5, '4444444444444', 'Amul Butter 500g', 'Dairy', 220.00, 27),
+(6, '3333333333333', 'Red Label Tea 250g', 'Beverages', 120.00, 17),
+(7, '6666666666666', 'Surf Excel Detergent 1kg', 'Household', 180.00, 17),
+(8, '7777777777777', 'Parle-G Biscuits', 'Snacks', 10.00, 100),
+(9, '8888888888888', 'Pepsi 500ml', 'Beverages', 45.00, 39),
+(10, '9999999999999', 'Maggi Instant Noodles', 'Snacks', 15.00, 65),
+(12, '01010101010101', 'Manforce', 'sexual_wellness', 50.00, 22),
+(13, '1111111111111', 'Nestle KitKat 4 Finger', 'Sweets', 25.00, 35),
+(14, '2222222222222', 'Britannia Good Day Cookies', 'Snacks', 20.00, 42),
+(15, '3333333333334', 'Sprite 1L', 'Beverages', 45.00, 33),
+(16, '4444444444445', 'Tata Salt 1kg', 'Groceries', 25.00, 58),
+(17, '5555555555556', 'Colgate MaxFresh 150g', 'Personal Care', 90.00, 35),
+(18, '6666666666667', 'Ariel Matic Liquid 2L', 'Household', 250.00, 20),
+(19, '7777777777778', 'Nescafe Classic 200g', 'Beverages', 290.00, 15),
+(20, '8888888888889', 'Tropicana Orange Juice 1L', 'Beverages', 120.00, 25),
+(21, '9999999999998', 'Bournvita 500g', 'Health Drink', 225.00, 18),
+(22, '1010101010101', 'Horlicks 500g', 'Health Drink', 230.00, 20),
+(23, '123455678901234', 'Lays', 'Chips', 10.00, 10),
+(24, '1234555678901234', 'Lays', 'Chips', 20.00, 10),
+(25, '1234455678900987654', 'Realme', 'Phone', 20.20, 1);
+
+
+
+
+--------------------------------------------------------------------------------------
+
+
+CREATE TABLE customer (
+    customer_id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    city_village VARCHAR(100),
+    age INT,
+    phone_number VARCHAR(15)
+);
+
+INSERT INTO customer (customer_id, name, city_village, age, phone_number) VALUES
+(1, 'Unknown Customer', '', 0, ''),
+(2, 'Surojit', 'midnipur', 24, '9547343813'),
+(3, 'Akib', 'Nainan', 12, ''),
+(4, 'Asik', 'Nainan', 22, ''),
+(5, 'Nasrin', '', 23, ''),
+(6, 'A', '', 12, ''),
+(7, 'A', '', 1, ''),
+(8, 'b', '', 1, ''),
+(9, 'atunu', '', 23, ''),
+(10, 'gg', '', 9, ''),
+(11, 'gwgaw', '', 3, '');
+
+
+--------------------------------------------------------------------------------------------------
+
+
+CREATE TABLE sales_history (
+    sale_id SERIAL PRIMARY KEY,
+    date DATE,
+    customer_id INT REFERENCES customer(customer_id),
+    total_amount NUMERIC(10, 2),
+    payment_method VARCHAR(20)
+);
+
+
+INSERT INTO sales_history (sale_id, date, customer_id, total_amount, payment_method) VALUES
+(1, '2024-04-01', 1, 100.00, 'Cash'),
+(2, '2024-04-02', 1, 75.50, 'Card'),
+(3, '2024-04-03', 1, 150.25, 'UPI'),
+(4, '2024-04-04', 1, 200.00, 'Cash'),
+(5, '2024-04-05', 1, 50.75, 'Card'),
+(6, '2024-04-06', 1, 120.00, 'UPI'),
+(7, '2024-04-07', 1, 80.00, 'Cash'),
+(8, '2024-04-08', 1, 90.50, 'Card'),
+(9, '2024-04-09', 1, 110.25, 'UPI'),
+(10, '2024-04-10', 1, 60.00, 'Cash'),
+(11, '2024-04-11', 1, 95.75, 'Card'),
+(12, '2024-04-12', 1, 130.00, 'UPI'),
+(13, '2024-04-13', 1, 70.00, 'Cash'),
+(14, '2024-04-14', 1, 85.50, 'Card'),
+(15, '2024-04-15', 1, 140.25, 'UPI'),
+(16, '2024-04-16', 1, 210.00, 'Cash'),
+(17, '2024-04-17', 1, 65.75, 'Card'),
+(18, '2024-04-18', 1, 100.00, 'UPI'),
+(19, '2024-04-19', 1, 150.00, 'Cash'),
+(20, '2024-04-20', 1, 55.50, 'Card'),
+(21, '2024-04-21', 1, 125.75, 'UPI');
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------
+
+
+
+CREATE TABLE scanned_barcodes (
+    scan_id SERIAL PRIMARY KEY,
+    sale_id INT REFERENCES sales_history(sale_id),
+    barcode VARCHAR(20) REFERENCES product(barcode),
+    quantity INT NOT NULL,
+    price_per_unit NUMERIC(10, 2),
+    total_price NUMERIC(10, 2)
+);
+
+
+
+INSERT INTO scanned_barcodes (sale_id, barcode, quantity, price_per_unit, total_price) VALUES
+(1, '123456789012', 2, 10.00, 20.00),
+(1, '234567890123', 1, 15.50, 15.50),
+(2, '345678901234', 3, 8.00, 24.00),
+(3, '456789012345', 1, 12.25, 12.25),
+(4, '567890123456', 4, 5.00, 20.00),
+(5, '678901234567', 2, 25.00, 50.00),
+(6, '789012345678', 1, 60.00, 60.00),
+(7, '890123456789', 1, 20.00, 20.00),
+(8, '901234567890', 3, 10.50, 31.50),
+(9, '123456789012', 2, 10.00, 20.00),
+(10, '234567890123', 1, 15.50, 15.50),
+(11, '345678901234', 2, 8.00, 16.00),
+(12, '456789012345', 1, 12.25, 12.25),
+(13, '567890123456', 2, 5.00, 10.00),
+(14, '678901234567', 1, 25.00, 25.00),
+(15, '789012345678', 1, 60.00, 60.00),
+(16, '890123456789', 3, 20.00, 60.00),
+(17, '901234567890', 1, 10.50, 10.50),
+(18, '123456789012', 4, 10.00, 40.00),
+(19, '234567890123', 2, 15.50, 31.00),
+(20, '345678901234', 2, 8.00, 16.00),
+(21, '456789012345', 1, 12.25, 12.25);

@@ -1,0 +1,355 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Barcodes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #f72585;
+            --gray: #6c757d;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            font-weight: 600;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .btn {
+            text-decoration: none;
+            background-color: var(--success);
+            color: var(--white);
+            padding: 16px 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(76, 201, 240, 0.2);
+        }
+
+        .btn:hover {
+            background-color: #3ab7dc;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn i {
+            margin-right: 10px;
+        }
+
+        .btn-secondary {
+            background-color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-dark);
+            box-shadow: 0 6px 12px rgba(67, 97, 238, 0.3);
+        }
+
+        .scan-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .scanner-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .scanner-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, #e0e0e0 25%, #f5f5f5 25%, #f5f5f5 50%, #e0e0e0 50%, #e0e0e0 75%, #f5f5f5 75%, #f5f5f5 100%);
+            background-size: 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 1.2rem;
+        }
+
+        .scan-result,
+        .basket-section {
+            margin-top: 40px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-card,
+        .basket-card {
+            background-color: var(--light);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            text-align: left;
+            border-left: 4px solid var(--primary);
+        }
+
+        .result-card h3,
+        .basket-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .result-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .detail-item {
+            margin-bottom: 10px;
+        }
+
+        .detail-item strong {
+            color: var(--dark);
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .detail-item span {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .error-message {
+            color: var(--danger);
+            font-weight: 500;
+        }
+
+        .basket-items {
+            margin-top: 20px;
+        }
+
+        .basket-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .basket-item:last-child {
+            border-bottom: none;
+        }
+
+        .basket-item-info {
+            flex: 1;
+        }
+
+        .basket-item-name {
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .basket-item-meta {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .basket-item-price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .remove-btn {
+            background-color: #e74c3c;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .remove-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .button-row .btn {
+            flex: 1;
+        }
+
+        .total-amount {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .total-amount span {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .button-row {
+                flex-direction: column;
+            }
+
+            .result-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Barcode Scanner</h1>
+        
+        <div class="scan-section">
+            <div class="scanner-container">
+                <div class="scanner-placeholder">
+                    <i class="fas fa-barcode fa-3x" style="margin-right: 15px;"></i>
+                    Scanner Ready
+                </div>
+            </div>
+            <form method="POST">
+                <button type="submit" class="btn">
+                    <i class="fas fa-camera"></i> Start Scanning
+                </button>
+            </form>
+        </div>
+        
+        {% if result %}
+        <div class="scan-result">
+            <div class="result-card">
+                <h3>Scan Result</h3>
+                {% if result.error %}
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-circle"></i> {{ result.error }}
+                    </div>
+                {% else %}
+                    <div class="result-details">
+                        <div class="detail-item">
+                            <strong>Barcode</strong>
+                            <span>{{ result.barcode }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Product Name</strong>
+                            <span>{{ result.name }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Price</strong>
+                            <span>₹{{ "%.2f"|format(result.price) }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Stock</strong>
+                            <span>{{ result.stock }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="button-row">
+                <a href="/scan" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Continue Shopping
+                </a>
+                <a href="/checkout" class="btn btn-success">
+                    <i class="fas fa-credit-card"></i> Proceed to Payment
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

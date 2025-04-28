@@ -1,0 +1,16 @@
+********** Retail Store Receipt **********
+Customer ID: 22
+Name: Nandan M
+Phone: 8597009212
+City/Village: dom dom 
+Date & Time of Purchase: 2025-04-28 11:19:58
+-----------------------------------------
+
+Product(s) Purchased:
+-----------------------------------------
+Product: Sprite 1L | Price: Rs 45.0 | Quantity: 1 | Total: Rs 45.0
+-----------------------------------------
+Total Amount: Rs 45.00
+-----------------------------------------
+Thank you for shopping with us!
+*****************************************

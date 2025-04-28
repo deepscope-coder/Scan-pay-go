@@ -1,0 +1,15 @@
+********** Retail Store Receipt **********
+Customer ID: 23
+Name: Nandan M
+Phone: 8597009212
+City/Village: dom dom 
+Date & Time of Purchase: 2025-04-28 11:20:48
+-----------------------------------------
+
+Product(s) Purchased:
+-----------------------------------------
+-----------------------------------------
+Total Amount: Rs 0.00
+-----------------------------------------
+Thank you for shopping with us!
+*****************************************

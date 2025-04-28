@@ -1,0 +1,8 @@
+Customer ID: 43
+Name: Shadan Alam 
+Email: None
+
+Items Purchased:
+Product: Sprite 1L | Price: ₹45.0 | Quantity: 1
+
+Thank you for shopping with us!

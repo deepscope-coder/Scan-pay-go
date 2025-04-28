@@ -1,0 +1,5 @@
+Receipt for Customer ID: 21
+
+Product: Sprite 1L | Price: Rs 45.0 | Quantity: 1
+
+Total Amount: Rs 45.00

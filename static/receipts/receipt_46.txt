@@ -1,0 +1,8 @@
+Customer ID: 46
+Name: surojit m
+Email: None
+
+Items Purchased:
+Product: Britannia Good Day Cookies | Price: ₹20.0 | Quantity: 1
+
+Thank you for shopping with us!
